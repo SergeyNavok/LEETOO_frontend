@@ -1,0 +1,12 @@
+//Fonts
+@mixin textStyle() {
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+    font-family: 'Nunito';
+}
+
+//Flex
+@mixin flexAlign($hor: center, $vert: center) {
+    display: flex;
+    justify-content: $hor;
+    align-items: $vert;
+}
