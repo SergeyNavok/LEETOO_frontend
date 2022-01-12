@@ -123,6 +123,40 @@ body {
 
 
 
+.slider {
+    top: 50px;
+    max-width: 700px;
+
+    &__items {
+        counter-reset: slide;
+        height: 250px;
+
+        &__item {
+            counter-increment: slide;
+        }
+    }
+}
+
+.img-fluid {
+    display: inline-block;
+    height: auto;
+    max-width: 100%;
+}
+
+.slider__item>div::before {
+    content: counter(slide);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    font-style: italic;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+
+
+
 
 
 @media screen and (min-width: 600px) {
@@ -154,7 +188,11 @@ body {
     }
 
     .text-link {
-        font-size: medium;
+        font-size: large;
         color: $text-color-main;
+    }
+
+    .slider__items {
+        height: 300px;
     }
 }
