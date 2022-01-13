@@ -127,7 +127,7 @@ body {
 .slider {
     top: 50px;
     max-width: 700px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
 
     &__items {
         counter-reset: slide;
@@ -159,6 +159,28 @@ body {
 
 
 
+.dropdown {
+    @include flexAlign(space-evenly, center);
+    height: 35px;
+    margin: 0px 40px 30px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
+    background-color: $text-color-main;
+    border-radius: 30px;
+    border: 1px solid $color-border;
+
+    .select-wrapper { 
+        font-weight: 700;
+        font-size: 14px;
+        padding: 5px;
+        box-sizing: border-box;
+        margin: 0;
+        border-radius: 10px;
+        border: none;
+    }
+}
+
+
+
 .container {
     display: flex;
     flex-direction: column;
@@ -167,6 +189,7 @@ body {
     border-radius: 30px;
     background-color: $text-color-main;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid $color-border;
     padding: 30px;
     box-sizing: border-box;
 
@@ -192,6 +215,52 @@ body {
 
 
 
+.products {
+    @include flexAlign(center, center);
+    flex-wrap: wrap;
+
+    &__block {
+        height: 330px;
+        width: 47%;
+        height: inherit;
+        border-radius: 30px;
+        margin: 0 5px 50px;
+        background-color: $text-color-main;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
+
+        &-item {
+            @include flexAlign(space-around, center);
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+            color: $text-color-alt;
+            height: 100%;
+
+            .img {
+                width: 150px;
+                height: 150px;
+                object-fit: contain;
+                border-radius: 15px;
+            }
+
+            .name {
+                margin-top: 30px;
+                font-size: small;
+                text-align: center;
+                height: 70px;
+            }
+
+            .price {
+                margin-top: 30px;
+                font-size: smaller;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
 .footer {
     @include flexAlign;
     @include textStyle;
@@ -201,6 +270,7 @@ body {
     color: $text-color-main;
     margin: 0 auto;
 }
+
 
 
 
@@ -252,6 +322,32 @@ body {
 
     .banner {
         height: 350px;
+    }
+
+    .dropdown {
+        margin: 50px 150px 30px;
+    }
+
+    .products__block {
+        width: 35%;
+        margin: 0 7% 50px;
+
+        .img {
+            width: inherit;
+        }
+
+        .name {
+            font-size: medium;
+        }
+
+        .price {
+            font-size: medium;
+        }
+    }
+
+    .products__block:hover {
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+        transition: 0.5s;
     }
 
     .footer {
