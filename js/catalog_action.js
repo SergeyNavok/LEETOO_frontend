@@ -80,7 +80,7 @@ function getProductItem(product) {
     const productImg = getNewTag('img', 'img');
 
     //linkTag.href = 'product.html';
-    productImg.src = '..//img/product/' + product.id + '/product.jpg';
+    productImg.src = 'img/product/' + product.id + '/product.jpg';
     productImg.alt = product.name;
 
     const productName = getNewTag('div', 'name', product.name);
@@ -144,6 +144,8 @@ function changeCategory(event) {
             const catalogFiltered = catalogCopy.filter(item => item.category === category);
             renderCatalog(catalogFiltered);
     }
+
+    checkProduct();
 }
 
 
@@ -179,10 +181,12 @@ renderDropdown(catalog);
 
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close');
-const productBlock = document.querySelectorAll('.products__block');
+//var productBlock = document.querySelectorAll('.products__block');
 
-function checkProduct(productBlock) {
+function checkProduct() {
+    const productBlock = document.querySelectorAll('.products__block');
     paramElem = Array.from(productBlock);
+    //
     console.log(paramElem);
 
     for (let i = 0; i < paramElem.length; i++) {
@@ -194,7 +198,7 @@ function checkProduct(productBlock) {
 closeModalBtn.addEventListener('click', closeModalWindow);
 modal.addEventListener('click', closeModalWindow);
 
-checkProduct(productBlock);
+checkProduct();
 
 function showProduct() {
     modal.classList.add('show');
