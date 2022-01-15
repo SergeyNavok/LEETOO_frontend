@@ -59,11 +59,25 @@ const catalog = [
 
 
 
-//Куда будут записываться сформированные единицы продукции
-//Обращался по id, потому как по-другому не удавалось достучаться
 const productsTag = document.getElementById('products');
+const catalogDropdown = document.getElementById('dropdown_menu');
+const modal = document.getElementById('modal');
+const closeModalBtn = document.getElementById('close');
 
-//Функция создания элементов на странице
+catalogDropdown.addEventListener('change', changeCategory);
+closeModalBtn.addEventListener('click', closeModalWindow);
+modal.addEventListener('click', closeModalWindow);
+
+const dropdownCategoryDefault = 'по умолчанию';
+const dropdownCategoryAsc = 'сначала подешевле';
+const dropdownCategoryDesc = 'сначала подороже';
+
+renderDropdown();
+renderCatalog(catalog);
+showProduct();
+
+
+
 function getNewTag(tagName, className, content = null) {
     const newTag = document.createElement(tagName);
     newTag.classList.add(className);
@@ -72,29 +86,25 @@ function getNewTag(tagName, className, content = null) {
     return newTag;
 }
 
-//Функция формирования разметки продукта
-function getProductItem(product) {
+
+function getProductItem(item) {
     const productBlock = getNewTag('div', 'products__block');
-    //const linkTag = getNewTag('a', 'text-link');
     const productBlockItem = getNewTag('div', 'products__block-item');
     const productImg = getNewTag('img', 'img');
 
-    //linkTag.href = 'product.html';
-    productImg.src = 'img/product/' + product.id + '/product.jpg';
-    productImg.alt = product.name;
+    productImg.src = 'img/product/' + item.id + '/product.jpg';
+    productImg.alt = item.name;
 
-    const productName = getNewTag('div', 'name', product.name);
-    const productPrice = getNewTag('div', 'price', product.price + ' BYN');
+    const productName = getNewTag('div', 'name', item.name);
+    const productPrice = getNewTag('div', 'price', item.price + ' BYN');
 
     productBlockItem.append(productImg, productName, productPrice);
-    //linkTag.append(productBlockItem);
-    //productBlock.append(linkTag);
     productBlock.append(productBlockItem);
 
     return productBlock;
 }
 
-//Функция получения продуктов из каталога
+
 function renderCatalog(catalog) {
     productsTag.innerHTML = '';
     const catalogCopy = catalog;
@@ -102,25 +112,7 @@ function renderCatalog(catalog) {
     productsTag.append(...product);
 }
 
-//Запуск функции отрисовки каталога
-renderCatalog(catalog);
 
-
-
-
-
-//Обработка выпадающего меню
-const catalogDropdown = document.getElementById('dropdown_menu');
-
-//Обработчик события
-catalogDropdown.addEventListener('change', changeCategory);
-const dropdownCategoryDefault = 'по умолчанию';
-const dropdownCategoryAsc = 'сначала подешевле';
-const dropdownCategoryDesc = 'сначала подороже';
-
-
-
-//Функция обработки события
 function changeCategory(event) {
     const category = event.target.value;
     const catalogCopy = catalog;
@@ -144,13 +136,10 @@ function changeCategory(event) {
             const catalogFiltered = catalogCopy.filter(item => item.category === category);
             renderCatalog(catalogFiltered);
     }
-
-    checkProduct();
+    showProduct();
 }
 
 
-
-//Функция добавления категрий в выпадающее меню
 function returnNewTagOption(nameCategory) {
     const newTagOption = document.createElement('option');
     newTagOption.value = nameCategory;
@@ -159,7 +148,8 @@ function returnNewTagOption(nameCategory) {
     return newTagOption;
 }
 
-function renderDropdown(catalog) {
+
+function renderDropdown() {
     catalogDropdown.innerHTML = '';
     catalogDropdown.append(returnNewTagOption(dropdownCategoryDefault));
     catalogDropdown.append(returnNewTagOption(dropdownCategoryAsc));
@@ -173,37 +163,23 @@ function renderDropdown(catalog) {
     }
 }
 
-renderDropdown(catalog);
 
-
-
-
-
-const modal = document.getElementById('modal');
-const closeModalBtn = document.getElementById('close');
-//var productBlock = document.querySelectorAll('.products__block');
-
-function checkProduct() {
+function showProduct() {
     const productBlock = document.querySelectorAll('.products__block');
-    paramElem = Array.from(productBlock);
-    //
-    console.log(paramElem);
+    arr = Array.from(productBlock);
 
-    for (let i = 0; i < paramElem.length; i++) {
-        elem = paramElem[i];
-        elem.addEventListener('click', showProduct);
+    for (let i = 0; i < arr.length; i++) {
+        elem = arr[i];
+        elem.addEventListener('click', openModalWindow);
     }
 }
 
-closeModalBtn.addEventListener('click', closeModalWindow);
-modal.addEventListener('click', closeModalWindow);
 
-checkProduct();
-
-function showProduct() {
+function openModalWindow() {
     modal.classList.add('show');
 
 }
+
 
 function closeModalWindow() {
     modal.classList.remove('show');

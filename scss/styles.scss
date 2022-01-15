@@ -35,7 +35,7 @@ body {
         width: 25px;
         padding: 7px;
         transition: left .23s;
-        z-index: 3;
+        z-index: 10;
     }
 
     .btn-menu span {
@@ -262,24 +262,24 @@ body {
 }
 
 
+
 .modal {
     display: none;
     position: fixed;
     top: 0;
     width: 100%;
     height: 100vh;
-    z-index: 1000;
+    z-index: 100;
     background-color: rgba(0,0,0,.5);
     padding-top: 100px;
     box-sizing: border-box;
 
     .show_product {
-        background-color: $color-background;
+        background-color: $text-color-main;
         height: 600px;
         border-radius: 30px;
     }
 }
-
 
 .close {
     @include flexAlign;
@@ -312,7 +312,7 @@ body {
 
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 700px) {
     .wpapper {
         max-width: 700px;
     }
@@ -389,10 +389,9 @@ body {
 
     .modal {
         width: 700px;
-        padding: 100px 10%;
+        padding: 110px;
         box-sizing: border-box;
     }
-    
 
     .footer {
         max-width: 700px;
