@@ -261,6 +261,41 @@ body {
 }
 
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    background-color: rgba(0,0,0,.5);
+    padding-top: 100px;
+    box-sizing: border-box;
+
+    .show_product {
+        background-color: $color-background;
+        height: 600px;
+        border-radius: 30px;
+    }
+}
+
+
+.close {
+    @include flexAlign;
+    height: 40px;
+    font-weight: bold;
+    font-size: 30px;
+    background: $color-main;
+    color: $text-color-main;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+}
+
+.show {
+    display: flex;
+}
+
+
 
 .footer {
     @include flexAlign;
@@ -350,6 +385,13 @@ body {
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
         transition: 0.5s;
     }
+
+    .modal {
+        width: 700px;
+        padding: 100px 10%;
+        box-sizing: border-box;
+    }
+    
 
     .footer {
         max-width: 700px;

@@ -18,7 +18,7 @@ const catalog = [
     {
         'name': 'Сахарная паста для шугаринга "LEETOO" CLASSIC MIDDLE (Средняя)',
         'id': 3,
-        'category': 'гели',
+        'category': 'скрабы',
         'desription': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam fuga consequuntur explicabo quos quibusdam animi rerum quidem repudiandae nisi libero perspiciatis saepe repellendus voluptatem, natus, alias suscipit enim! Consequatur, eveniet!',
         'price': 100,
         'weight': 700
@@ -75,9 +75,11 @@ function getNewTag(tagName, className, content = null) {
 //Функция формирования разметки продукта
 function getProductItem(product) {
     const productBlock = getNewTag('div', 'products__block');
+    //const linkTag = getNewTag('a', 'text-link');
     const productBlockItem = getNewTag('div', 'products__block-item');
     const productImg = getNewTag('img', 'img');
 
+    //linkTag.href = 'product.html';
     productImg.src = '..//img/product/' + product.id + '/product.jpg';
     productImg.alt = product.name;
 
@@ -85,6 +87,8 @@ function getProductItem(product) {
     const productPrice = getNewTag('div', 'price', product.price + ' BYN');
 
     productBlockItem.append(productImg, productName, productPrice);
+    //linkTag.append(productBlockItem);
+    //productBlock.append(linkTag);
     productBlock.append(productBlockItem);
 
     return productBlock;
@@ -160,7 +164,7 @@ function renderDropdown(catalog) {
     catalogDropdown.append(returnNewTagOption(dropdownCategoryDesc));
 
     const catalogCopy = catalog;
-    
+
     const categoryProduct = new Set(catalogCopy.map(item => item.category));
     for (let item of categoryProduct) {
         catalogDropdown.append(returnNewTagOption(item));
@@ -168,3 +172,35 @@ function renderDropdown(catalog) {
 }
 
 renderDropdown(catalog);
+
+
+
+
+
+const modal = document.getElementById('modal');
+const closeModalBtn = document.getElementById('close');
+const productBlock = document.querySelectorAll('.products__block');
+
+function checkProduct(productBlock) {
+    paramElem = Array.from(productBlock);
+    console.log(paramElem);
+
+    for (let i = 0; i < paramElem.length; i++) {
+        elem = paramElem[i];
+        elem.addEventListener('click', showProduct);
+    }
+}
+
+closeModalBtn.addEventListener('click', closeModalWindow);
+modal.addEventListener('click', closeModalWindow);
+
+checkProduct(productBlock);
+
+function showProduct() {
+    modal.classList.add('show');
+
+}
+
+function closeModalWindow() {
+    modal.classList.remove('show');
+}
