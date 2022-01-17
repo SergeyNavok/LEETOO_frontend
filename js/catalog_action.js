@@ -74,7 +74,6 @@ const dropdownCategoryDesc = 'сначала подороже';
 
 renderDropdown();
 renderCatalog(catalog);
-//showProduct();
 
 
 
@@ -87,7 +86,7 @@ function getNewTag(tagName, className, content = null) {
 }
 
 
-function getProductItem(item) {
+function getProductDomMin(item) {
     const productBlock = getNewTag('div', 'products__block');
     const productBlockItem = getNewTag('div', 'products__block-item');
     const productImg = getNewTag('img', 'img');
@@ -97,37 +96,46 @@ function getProductItem(item) {
 
     const productName = getNewTag('div', 'name', item.name);
     const productPrice = getNewTag('div', 'price', item.price + ' BYN');
-    //const productId = getNewTag('div', 'product_id', item.id);
 
     productBlockItem.append(productImg, productName, productPrice);
     productBlock.append(productBlockItem);
-
-    //
+    
     productBlockItem.id = item.id;
-    //
-    //console.log('productBlock.value=' + productBlock.value);
-    //productBlock.desription = item.desription;
-
-    //productBlock.weight = item.weight;
-    //console.log('productBlock.weight=' + productBlock.weight);
-
-
-    //console.log(productBlock);
-    //
-    //productBlock.id(item.id);
-    //console.log(item.id);
-    //console.log(productBlock.id);
-    //
 
     return productBlock;
+}
+
+
+function getProductDomFull(item) {
+    const showProduct = getNewTag('div', 'show_product');
+    const closeBtn = getNewTag('div', 'close', 'X');
+    const productImg = getNewTag('img', 'img');
+
+    productImg.src = 'img/product/' + item.id + '/product.jpg';
+    productImg.alt = item.name;
+
+    const productName = getNewTag('div', 'name', item.name);
+    const productDescription = getNewTag('div', 'description', item.desription);
+    const productWeight = getNewTag('div', 'weight', 'вес: ' + item.weight + ' гр.');
+    const productPrice = getNewTag('div', 'price', item.price + ' BYN');
+
+    showProduct.append(closeBtn, productImg, productName, productDescription, productWeight, productPrice);
+
+    return showProduct;
 }
 
 
 function renderCatalog(catalog) {
     productsTag.innerHTML = '';
     const catalogCopy = catalog;
-    const product = catalogCopy.map(item => getProductItem(item));
+    const product = catalogCopy.map(item => getProductDomMin(item));
     productsTag.append(...product);
+}
+
+
+function renderProduct(product) {
+    modal.innerHTML = '';
+    modal.append(getProductDomFull(product));
 }
 
 
@@ -154,8 +162,6 @@ function changeCategory(event) {
             const catalogFiltered = catalogCopy.filter(item => item.category === category);
             renderCatalog(catalogFiltered);
     }
-    //showProduct();
-    //Event.stopPropognation(event);
 }
 
 
@@ -182,70 +188,30 @@ function renderDropdown() {
     }
 }
 
-/*
-function showProduct() {
-    const productBlock = document.querySelectorAll('.products__block');
-    arr = Array.from(productBlock);
-
-    for (let i = 0; i < arr.length; i++) {
-        arr[i].addEventListener('click', openModalWindow);
-        //arr[i].addEventListener('click', product.onclick);
-
-
-        //
-        console.log(arr[i].value);
-        //
-    }
-
-    //
-    //console.log(arr[1].id.value);
-    //
-}
-*/
-
 
 function openModalWindow(value) {
-    console.log('in_id=' + value);
-
-    modal.classList.add('show');
     const catalogCopy = catalog;
-    console.log(catalogCopy.find(item => item.id == value));
-
-    //console.log(catalog.filter(id, value));
-    //const value = getProductItem(catalog[id]);
-    //console.log(value);
-    //
-    //console.log(id);
-    //
+    renderProduct(catalogCopy.find(item => item.id == value));
+    modal.classList.add('show');
 }
 
 
 function closeModalWindow() {
     modal.classList.remove('show');
-    //Event.stopPropognation(modal);
 }
 
 
-//---------------------------------------------------------------------
-
 products.onclick = function (event) {
-    //if (event.target.className != 'products__block-item' && event.target.className != 'img' && event.target.className != 'name' && event.target.className != 'price') return;
     if (checkClassName(event.target.className)) {
         return;
     }
 
     switch (event.target.className) {
         case ('products__block-item'):
-            //
-            console.log('out_id=' + event.target.id);
-            //
             openModalWindow(event.target.id);
             break;
 
         default:
-            //
-            console.log('out_id=' + event.target.parentElement.id);
-            //
             openModalWindow(event.target.parentElement.id);
     }
 }
