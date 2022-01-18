@@ -1,4 +1,4 @@
-const catalog2 = [
+const catalog = [
     {
         name: 'Сахарная паста для шугаринга "LEETOO" CLASSIC ULTRALIGHT (Ультрамягкая)',
         id: 1,
