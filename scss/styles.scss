@@ -1,0 +1,452 @@
+@import './colors.scss';
+@import './mixin.scss';
+
+body {
+    margin: 0;
+}
+
+
+
+.wpapper {
+    @include textStyle;
+    background-color: $color-background;
+    min-height: calc(100vh - 30px);
+    margin: 0px auto;
+}
+
+
+
+.header {
+    @include flexAlign(space-around, center);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: $color-main;
+    color: $text-color-main;
+    z-index: 1;
+
+    .btn-menu {
+        color: $color-main;
+        background-color: $color-main;
+        position: fixed;
+        top: 9px;
+        left: 10px;
+        width: 25px;
+        padding: 7px;
+        transition: left .23s;
+        z-index: 10;
+    }
+
+    .btn-menu span {
+        display: block;
+        position: relative;
+        height: 3px;
+        background-color: $text-color-main;
+        margin: 5px 0 0;
+        transition: all .1s linear .23s;
+    }
+
+    .btn-menu span.first {
+        margin-top: 0;
+    }
+
+    .hidden-menu {
+        @include flexAlign(flex-start, center);
+        flex-direction: column;
+        position: fixed;
+        list-style: none;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100%;
+        padding: 70px 30px 0 30px;
+        box-sizing: border-box;
+        margin: 0;
+        background-color: $color-menu;
+        transition: left .2s;
+        z-index: 2;
+
+        .hidden-menu-ticker {
+            display: none;
+        }
+
+        &__link {
+            height: 50px;
+        }
+    }
+
+    .hidden-menu-ticker:checked ~ .btn-menu {
+        left: 230px;
+    }
+    
+    .hidden-menu-ticker:checked ~ .hidden-menu {
+        left: 0;
+    }
+    
+    .hidden-menu-ticker:checked ~ .btn-menu span.first {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        top: 8px;
+    }
+    
+    .hidden-menu-ticker:checked ~ .btn-menu span.second {
+        opacity: 0;
+    }
+    
+    .hidden-menu-ticker:checked ~ .btn-menu span.third {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        top: -8px;    
+    }
+
+    &__logo {
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        color: $text-color-main;
+    }
+
+    &__phone {
+        text-decoration: none;
+        color: $text-color-main;
+        font-weight: bold;
+    }
+}
+
+
+
+.text-link {
+    text-decoration: none;
+    font-size: 20px;
+    color: $text-color-alt;
+}
+
+
+
+.slider {
+    top: 50px;
+    max-width: 700px;
+    margin-bottom: 80px;
+
+    &__items {
+        counter-reset: slide;
+        height: 250px;
+
+        &__item {
+            counter-increment: slide;
+        }
+    }
+}
+
+.img-fluid {
+    display: inline-block;
+    height: auto;
+    max-width: 100%;
+}
+
+
+
+.banner__img {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+    object-fit: cover;
+}
+
+
+
+.dropdown {
+    @include flexAlign(space-evenly, center);
+    height: 35px;
+    margin: 0px 40px 30px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    background-color: $text-color-main;
+    border-radius: 30px;
+    border: 1px solid $color-border;
+
+    .select-wrapper { 
+        font-weight: 700;
+        font-size: 14px;
+        padding: 5px;
+        box-sizing: border-box;
+        margin: 0;
+        border-radius: 10px;
+        border: none;
+    }
+}
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 50px;
+    border-radius: 30px;
+    background-color: $text-color-main;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid $color-border;
+    padding: 30px;
+    box-sizing: border-box;
+
+    .text {
+        margin-bottom: 50px;
+    }
+}
+
+
+
+.BTN {
+    @include flexAlign;
+    height: 35px;
+    width: 200px;
+    background-color: $color-main;
+    border-radius: 30px;
+    border: 1px solid $color-border;
+    text-decoration: none;
+    font-weight: bold;
+    color: $text-color-main;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.products {
+    @include flexAlign(center, center);
+    flex-wrap: wrap;
+
+    &__block {
+        height: 330px;
+        width: 45%;
+        height: inherit;
+        border-radius: 30px;
+        margin: 0 5px 50px;
+        background-color: $text-color-main;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        border: 1px solid $color-border;
+
+        &-item {
+            @include flexAlign(space-around, center);
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+            color: $text-color-alt;
+            height: 100%;
+            cursor: pointer;
+
+            .img {
+                width: 150px;
+                height: 150px;
+                object-fit: contain;
+                border-radius: 15px;
+            }
+
+            .name {
+                margin-top: 30px;
+                font-size: small;
+                text-align: center;
+                height: 70px;
+            }
+
+            .price {
+                margin-top: 30px;
+                font-size: medium;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgba(0,0,0,.5);
+    padding-top: 100px;
+    box-sizing: border-box;
+
+    .show_product {
+        @include flexAlign(flex-start, center);
+        flex-direction: column;
+        background-color: $text-color-main;
+        width: 100%;
+        height: 600px;
+        border-radius: 30px;
+        text-align: center;
+        font-weight: bold;
+
+        .img {
+            width: 70%;
+        }
+
+        .name {
+            padding: 0 50px;
+            box-sizing: border-box;
+        }
+
+        .description {
+            padding-top: 10px;
+            box-sizing: border-box;
+            font-weight: normal;
+        }
+
+        .weight {
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+
+        .price {
+            @include flexAlign;
+            background-color: $color-background;
+            border-radius: 1px solid $color-main;
+            border-radius: 10px;
+            height: 50px;
+            width: 150px;
+            font-size: larger;
+        }
+    }
+}
+
+.close {
+    @include flexAlign;
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
+    font-size: 30px;
+    background: $color-main;
+    color: $text-color-main;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+}
+
+.show {
+    display: flex;
+}
+
+
+
+.footer {
+    @include flexAlign;
+    @include textStyle;
+    width: 100%;
+    height: 30px;
+    background-color: $color-main;
+    color: $text-color-main;
+    margin: 0 auto;
+}
+
+
+
+
+
+@media screen and (min-width: 700px) {
+    .wpapper {
+        max-width: 700px;
+    }
+
+    .header {
+        max-width: 700px;
+        font-size: medium;
+
+        .hidden-menu {
+            justify-content: space-between;
+            flex-direction: row;
+            position: inherit;
+            height: inherit;
+            padding: 0;
+            background-color: $color-main;
+            width: 120%;
+
+            &__link {
+                height: inherit;
+            }
+        }
+
+        .btn-menu, .hidden-menu-ticker, .header__logo {
+            display: none;
+        }
+    }
+
+    .text-link {
+        font-size: large;
+        color: $text-color-main;
+    }
+
+    .container {
+        margin: 0 10%;
+
+        .text {
+            padding: 20px;
+        }
+    }
+
+    .slider__items {
+        height: 350px;
+    }
+
+    .banner {
+        height: 350px;
+    }
+
+    .dropdown {
+        margin: 50px 150px 30px;
+    }
+
+    .products__block {
+        width: 35%;
+        margin: 0 7% 50px;
+
+        .img {
+            width: inherit;
+        }
+
+        .name {
+            font-size: medium;
+        }
+
+        .price {
+            font-size: medium;
+        }
+    }
+
+    .products__block:hover {
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+        transition: 0.5s;
+    }
+
+    .modal {
+        width: 700px;
+        padding: 110px;
+        box-sizing: border-box;
+
+        .show_product {
+            height: auto;
+
+            .name {
+                font-size: large;
+            }
+
+            .description {
+                padding-top: 20px;
+            }
+
+            .weight {
+                padding: 30px 0;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+    .footer {
+        max-width: 700px;
+    }
+}

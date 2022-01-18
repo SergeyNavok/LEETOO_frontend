@@ -1,0 +1,24 @@
+{
+  "name": "leetoo_frontend",
+  "version": "1.0.0",
+  "description": "Only frontend",
+  "main": "index.js",
+  "scripts": {
+    "compile": "node-sass scss/ -o css/",
+    "watch": "npm run compile && node-sass ./scss/styles.scss -wo css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeyNavok/LEETOO_frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeyNavok/LEETOO_frontend/issues"
+  },
+  "homepage": "https://github.com/SergeyNavok/LEETOO_frontend#readme",
+  "dependencies": {
+    "node-sass": "^7.0.1"
+  }
+}
